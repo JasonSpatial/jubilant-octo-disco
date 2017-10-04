@@ -1,9 +1,10 @@
-/[Ll]ibrary/
-/[Tt]emp/
-/[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
-/Assets/AssetStoreTools*
+Space Invaders Clone/[Ll]ibrary/
+Space Invaders Clone/[Tt]emp/
+Space Invaders Clone/[Oo]bj/
+Space Invaders Clone/[Bb]uild/
+Space Invaders Clone/[Bb]uilds/
+Space Invaders Clone/Assets/AssetStoreTools*
+
 
 # Visual Studio 2015 cache directory
 /.vs/
