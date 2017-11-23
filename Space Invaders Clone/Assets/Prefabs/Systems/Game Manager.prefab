@@ -53,3 +53,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy1Prefab: {fileID: 4678422268343798, guid: b811a685045df194abaf5815829b9f96,
     type: 2}
+  totalSpawnTime: 1
+  enemiesPerRow: 11
+  enemyHorizontalSpacing: 1.1
