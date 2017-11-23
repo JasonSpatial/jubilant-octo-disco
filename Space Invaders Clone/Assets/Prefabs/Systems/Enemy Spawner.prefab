@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4659646108198806}
   - component: {fileID: 114817076356874794}
   m_Layer: 0
-  m_Name: Game Manager
+  m_Name: Enemy Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

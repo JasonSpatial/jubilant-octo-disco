@@ -4,9 +4,9 @@
     using UnityEngine.Assertions;
 
     /// <summary>
-    ///     General game code that does not belong anywhere else.
+    ///     Handles spawning the enemies at the start of the level.
     /// </summary>
-    public class GameManager : MonoBehaviour
+    public class EnemySpawner : MonoBehaviour
     {
         [SerializeField]
         private Transform enemy1Prefab = null;
