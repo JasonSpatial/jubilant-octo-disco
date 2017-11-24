@@ -87,7 +87,7 @@
 
         private void Update()
         {
-            timeSinceLastEnemySpawn += Time.fixedDeltaTime;
+            timeSinceLastEnemySpawn += Time.deltaTime;
             while (timeSinceLastEnemySpawn >= SpawnDelay)
             {
                 timeSinceLastEnemySpawn -= SpawnDelay;
