@@ -40,8 +40,6 @@
 
         private int nextEnemyRow = 0;
 
-        private bool spawningEnemies = true;
-
         private Transform currentEnemyPrefab;
 
         private Transform enemyStartPosition;
@@ -72,35 +70,32 @@
 
         private void Update()
         {
-            if (spawningEnemies)
+            timeSinceLastEnemySpawn += Time.fixedDeltaTime;
+            while (timeSinceLastEnemySpawn >= SpawnDelay)
             {
-                timeSinceLastEnemySpawn += Time.fixedDeltaTime;
-                while (timeSinceLastEnemySpawn >= SpawnDelay)
-                {
-                    timeSinceLastEnemySpawn -= SpawnDelay;
+                timeSinceLastEnemySpawn -= SpawnDelay;
 
-                    Instantiate(currentEnemyPrefab, nextEnemySpawnPosition, Quaternion.identity);
-                    nextEnemySpawnPosition += new Vector3(enemyHorizontalSpacing, 0, 0);
-                    nextEnemyColumn++;
-                    if (nextEnemyColumn >= enemyColumns)
+                Instantiate(currentEnemyPrefab, nextEnemySpawnPosition, Quaternion.identity);
+                nextEnemySpawnPosition += new Vector3(enemyHorizontalSpacing, 0, 0);
+                nextEnemyColumn++;
+                if (nextEnemyColumn >= enemyColumns)
+                {
+                    nextEnemyRow++;
+                    if (nextEnemyRow >= enemyRows)
                     {
-                        nextEnemyRow++;
-                        if (nextEnemyRow >= enemyRows)
+                        enabled = false;
+                    }
+                    else
+                    {
+                        nextEnemyColumn = 0;
+                        nextEnemySpawnPosition = new Vector3(enemyStartPosition.position.x, nextEnemySpawnPosition.y - enemyVerticalSpacing, 0);
+                        if (nextEnemyRow == 1)
                         {
-                            spawningEnemies = false;
+                            currentEnemyPrefab = enemy2Prefab;
                         }
-                        else
+                        else if (nextEnemyRow >= 2)
                         {
-                            nextEnemyColumn = 0;
-                            nextEnemySpawnPosition = new Vector3(enemyStartPosition.position.x, nextEnemySpawnPosition.y - enemyVerticalSpacing, 0);
-                            if (nextEnemyRow == 1)
-                            {
-                                currentEnemyPrefab = enemy2Prefab;
-                            }
-                            else if (nextEnemyRow >= 2)
-                            {
-                                currentEnemyPrefab = enemy3Prefab;
-                            }
+                            currentEnemyPrefab = enemy3Prefab;
                         }
                     }
                 }
