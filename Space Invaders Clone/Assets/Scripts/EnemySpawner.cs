@@ -40,8 +40,6 @@
 
         private int nextEnemyRow = 0;
 
-        private Transform currentEnemyPrefab;
-
         private Transform enemyStartPosition;
 
         private int MaxEnemyCount
@@ -54,6 +52,25 @@
             get { return totalSpawnTime/MaxEnemyCount; }
         }
 
+        private Transform CurrentEnemyPrefab
+        {
+            get
+            {
+                if (nextEnemyRow == 0)
+                {
+                    return enemy1Prefab;
+                }
+                else if (nextEnemyRow == 1)
+                {
+                    return enemy2Prefab;
+                }
+                else
+                {
+                    return enemy3Prefab;
+                }
+            }
+        }
+
         private void Start()
         {
             Assert.IsTrue(enemy1Prefab != null, "No type 1 enemy prefab was provided.");
@@ -64,8 +81,6 @@
             Assert.IsTrue(enemyStartPositionGO != null, "Could not find the grid position.");
             enemyStartPosition = enemyStartPositionGO.transform;
             nextEnemySpawnPosition = enemyStartPosition.position;
-
-            currentEnemyPrefab = enemy1Prefab;
         }
 
         private void Update()
@@ -75,7 +90,7 @@
             {
                 timeSinceLastEnemySpawn -= SpawnDelay;
 
-                Instantiate(currentEnemyPrefab, nextEnemySpawnPosition, Quaternion.identity);
+                Instantiate(CurrentEnemyPrefab, nextEnemySpawnPosition, Quaternion.identity);
                 nextEnemySpawnPosition += new Vector3(enemyHorizontalSpacing, 0, 0);
                 nextEnemyColumn++;
                 if (nextEnemyColumn >= enemyColumns)
@@ -89,14 +104,6 @@
                     {
                         nextEnemyColumn = 0;
                         nextEnemySpawnPosition = new Vector3(enemyStartPosition.position.x, nextEnemySpawnPosition.y - enemyVerticalSpacing, 0);
-                        if (nextEnemyRow == 1)
-                        {
-                            currentEnemyPrefab = enemy2Prefab;
-                        }
-                        else if (nextEnemyRow >= 2)
-                        {
-                            currentEnemyPrefab = enemy3Prefab;
-                        }
                     }
                 }
             }
