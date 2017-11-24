@@ -97,13 +97,11 @@
                 if (nextEnemyColumn >= enemyColumns)
                 {
                     nextEnemyRow++;
+                    nextEnemyColumn = 0;
+
                     if (nextEnemyRow >= enemyRows)
                     {
                         enabled = false;
-                    }
-                    else
-                    {
-                        nextEnemyColumn = 0;
                     }
                 }
             }
