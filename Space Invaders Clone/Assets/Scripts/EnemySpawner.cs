@@ -34,8 +34,6 @@
 
         private float timeSinceLastEnemySpawn = 0;
 
-        private Vector3 nextEnemySpawnPosition;
-
         private int nextEnemyColumn = 0;
 
         private int nextEnemyRow = 0;
@@ -71,6 +69,11 @@
             }
         }
 
+        private Vector3 CurrentEnemySpawnPosition
+        {
+            get { return enemyStartPosition.position + new Vector3(nextEnemyColumn*enemyHorizontalSpacing, -nextEnemyRow*enemyVerticalSpacing); }
+        }
+
         private void Start()
         {
             Assert.IsTrue(enemy1Prefab != null, "No type 1 enemy prefab was provided.");
@@ -80,7 +83,6 @@
             GameObject enemyStartPositionGO = GameObject.FindGameObjectWithTag(Tags.EnemyStartPosition);
             Assert.IsTrue(enemyStartPositionGO != null, "Could not find the grid position.");
             enemyStartPosition = enemyStartPositionGO.transform;
-            nextEnemySpawnPosition = enemyStartPosition.position;
         }
 
         private void Update()
@@ -90,8 +92,7 @@
             {
                 timeSinceLastEnemySpawn -= SpawnDelay;
 
-                Instantiate(CurrentEnemyPrefab, nextEnemySpawnPosition, Quaternion.identity);
-                nextEnemySpawnPosition += new Vector3(enemyHorizontalSpacing, 0, 0);
+                Instantiate(CurrentEnemyPrefab, CurrentEnemySpawnPosition, Quaternion.identity);
                 nextEnemyColumn++;
                 if (nextEnemyColumn >= enemyColumns)
                 {
@@ -103,7 +104,6 @@
                     else
                     {
                         nextEnemyColumn = 0;
-                        nextEnemySpawnPosition = new Vector3(enemyStartPosition.position.x, nextEnemySpawnPosition.y - enemyVerticalSpacing, 0);
                     }
                 }
             }
