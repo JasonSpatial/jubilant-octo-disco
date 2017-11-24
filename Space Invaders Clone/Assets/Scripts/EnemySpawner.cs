@@ -70,7 +70,7 @@
             currentEnemyPrefab = enemy1Prefab;
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             if (spawningEnemies)
             {
