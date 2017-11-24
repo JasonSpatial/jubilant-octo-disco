@@ -32,6 +32,9 @@
         [SerializeField]
         private float enemyVerticalSpacing = 1.1f;
 
+        [SerializeField]
+        private string containerName = "Enemies";
+
         private float timeSinceLastEnemySpawn = 0;
 
         private int nextEnemyColumn = 0;
@@ -39,6 +42,8 @@
         private int nextEnemyRow = 0;
 
         private Transform enemyStartPosition;
+
+        private Transform enemiesContainer;
 
         private int MaxEnemyCount
         {
@@ -83,6 +88,8 @@
             GameObject enemyStartPositionGO = GameObject.FindGameObjectWithTag(Tags.EnemyStartPosition);
             Assert.IsTrue(enemyStartPositionGO != null, "Could not find the grid position.");
             enemyStartPosition = enemyStartPositionGO.transform;
+
+            enemiesContainer = new GameObject(containerName).transform;
         }
 
         private void Update()
@@ -92,7 +99,7 @@
             {
                 timeSinceLastEnemySpawn -= SpawnDelay;
 
-                Instantiate(CurrentEnemyPrefab, CurrentEnemySpawnPosition, Quaternion.identity);
+                Instantiate(CurrentEnemyPrefab, CurrentEnemySpawnPosition, Quaternion.identity, enemiesContainer);
                 nextEnemyColumn++;
                 if (nextEnemyColumn >= enemyColumns)
                 {

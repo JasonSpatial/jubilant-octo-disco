@@ -62,3 +62,4 @@ MonoBehaviour:
   enemyRows: 4
   enemyHorizontalSpacing: 1.1
   enemyVerticalSpacing: 1.1
+  containerName: Enemies
